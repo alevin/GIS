@@ -7,7 +7,8 @@
 *.bak
 
 # downloaded data files
-#
-#/gis_sfbay_currents/data/san-francisco-sample*
+qgis_sfbay_currents/data/san-francisco-sample_5m.nc
+qgis_sfbay_currents/data/san-francisco-sample_5m.grb
+qgis_sfbay_currents/data/san-francisco-sample.nc
 qgis_sfbay_currents/data/san-francisco-sample.grb
 
