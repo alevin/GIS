@@ -9,3 +9,5 @@
 # downloaded data files
 #
 /gis_sfbay_currents/data/san-francisco-sample*
+#qgis_sfbay_currents/data/san-francisco-sample.grb
+
