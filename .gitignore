@@ -1,0 +1,11 @@
+
+# Log file
+*.log
+
+# backup file
+*~
+*.bak
+
+# downloaded data files
+#
+gis_sfbay_currents/data/san-francisco-sample*
