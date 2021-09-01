@@ -23,12 +23,27 @@
         ]
       }
     },
+{
+      "type": "Feature",
+      "properties": {
+        "name": "SF Bay Enterance",
+        "latitude": 37.81,
+        "longitude": -122.502
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.502,
+          37.81
+        ]
+      }
+    },
     {
       "type": "Feature",
       "properties": {
-        "name": "Eagles Point",
-        "latitude": 37.788589,
-        "longitude": -122.494601
+        "name": "Eagles",
+        "latitude": 37.789,
+        "longitude": -122.495
       },
       "geometry": {
         "type": "Point",
@@ -41,9 +56,24 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Pancake Rock",
-        "latitude": 37.7890977,
-        "longitude": -122.4999889
+        "name": "Pancake",
+        "latitude": 37.789,
+        "longitude": -122.500
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4999884,
+          37.7890614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Deadman's",
+        "latitude": 37.789,
+        "longitude": -122.499
       },
       "geometry": {
         "type": "Point",
@@ -56,30 +86,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Deadman's Point",
-        "latitude": 37.789,
-        "longitude": -122.4990173
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.5,
-          37.789
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Buoy",
-        "latitude": 37.79028562,
-        "longitude": -122.4903068
+        "latitude": 37.790,
+        "longitude": -122.490
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4903068,
-          37.79028562
+          -122.490,
+          37.790
         ]
       }
     }

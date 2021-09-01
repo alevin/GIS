@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.ticker import (AutoMinorLocator, MultipleLocator,MaxNLocator,IndexLocator)
 from matplotlib.dates import HourLocator, MonthLocator, YearLocator, AutoDateLocator, AutoDateFormatter, ConciseDateFormatter, IndexDateFormatter, DateFormatter
-import nc_time_axis
+#import nc_time_axis
 import cftime
 
 import datetime as dt
@@ -18,7 +18,7 @@ from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 
 import seaborn as sns
 import pandas as pd
-import earthpy as et
+#import earthpy as et
 
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
@@ -42,11 +42,12 @@ start = dt.datetime(2016, 6, 30, 0, 0, 0)
 stop = dt.datetime(2016, 7, 5, 0, 0, 0)
 
 points = [
-    {"name": "Golden Gate", 	"lat": 37.819620, "lon": -122.478534},
-#    {"name": "Golden Gate", 	"lat": 37.81059988, "lon": -122.50199980},
-    {"name": "Eagles Point",   	"lat": 37.788589,   "lon": -122.494601  },
-    {"name": "Deadman's Point", "lat": 37.789139,   "lon": -122.499771 },
-#    {"name": "Buoy", "lat": 37.79028562,   "lon": -122.49030680 },
+#    {"name": "Golden Gate", 	"lat": 37.819620, "lon": -122.478534},
+    {"name": "SFbay enterance", "lat": 37.810, "lon": -122.502},
+    {"name": "Eagles",   	"lat": 37.789,   "lon": -122.495  },
+    {"name": "Deadman's", "lat": 37.790,   "lon": -122.500 },
+#    {"name": "Buoy", "lat": 37.790,   "lon": -122.490},
+    {"name": "Pancake", "lat": 37.7890614,   "lon": -122.4999884},
 ]
 
 # -122.50199980,37.81059988
@@ -88,7 +89,7 @@ def wind_uv_to_spd(U,V):
 #fig, ax2  = plt.subplots(figsize=(10,5))
 
 #fig, (ax1,ax2,ax3,ax4) = plt.subplots(figsize=(10,5),dpi=300,nrows=4, sharex=True, subplot_kw=dict(frameon=False)) 
-fig, (ax1,ax2,ax3) = plt.subplots(figsize=(15,6),dpi=300,nrows=3, sharex=True, subplot_kw=dict(frameon=False)) 
+fig, (ax1,ax2,ax3) = plt.subplots(figsize=(15,15),dpi=300,nrows=3, sharex=True, subplot_kw=dict(frameon=False)) 
 
 plt.subplots_adjust(hspace=1)
 
@@ -160,14 +161,18 @@ for p in points:
     ts.plot(linestyle = '-',ax=ax1)
     #ts2.plot(linestyle = '-',ax=ax2)
 
-    if pointname=='Golden Gate':
+    if pointname=='SFbay enterance':
       #ts4 = pd.Series(cd, index=tim, name=pointname)
       ts2.plot(linestyle = '-',ax=ax2)
       ts3.plot(linestyle = '-',ax=ax3)
     else:
-      ts2.plot(linestyle = 'dotted',ax=ax2)
-      ts3.plot(linestyle = 'dotted',ax=ax3)
-      
+      ts2.plot(linestyle = 'dashed',ax=ax2)
+      ts3.plot(linestyle = 'dashed',ax=ax3)
+
+    ts.to_csv('/tmp/'+pointname+'_tide.csv',header=True,index_label='Time')
+    ts2.to_csv('/tmp/'+pointname+'_current_speed.csv',header=True,index_label='Time')
+    ts3.to_csv('/tmp/'+pointname+'_current_dir.csv',header=True,index_label='Time')
+
 
 fig.tight_layout()
 ax2.tick_params(which='both', width=2)
@@ -181,25 +186,44 @@ ax3.grid(which="major",axis='x', linestyle=':', linewidth='0.4', color='black')
 
 plt.xticks(rotation=90,fontsize = 8)
 plt.subplots_adjust(bottom = 0.3)
+"""
 ax1.axis([0, 120, -2, 2])
 ax2.axis([0, 120, 0, 2.5])
 ax3.axis([0, 120, 0, 360])
+"""
+ax1.axis([46, 62, -2, 2])
+ax2.axis([46, 62, 0, 2.5])
+ax3.axis([46, 62, 0, 360])
+
 ax3.set_ylim(0, 361)
 #ax4.axis([0, 48, 0, 360])
 #ax4.set_ylim(0, 361)
 ax3.axhspan(45, 140, facecolor='green', alpha=0.3,label="ebb")
 ax3.axhspan(220, 315, facecolor='blue', alpha=0.3,label="flood")
 #ax.axhspan(9, 12, facecolor='red', alpha=0.5)
-ax3.legend(bbox_to_anchor=(0.7, -0.2), prop={'size':10}, fancybox=True, shadow=True,ncol=5)
+ax3.legend(bbox_to_anchor=(0.7, -0.2), prop={'size':10}, fancybox=True, shadow=True,ncol=6)
 
-ax2.arrow( 0, 2.0, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
-ax2.arrow( 7, 2.0, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
-ax2.arrow( 13, 2.0, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
-ax2.arrow( 20, 2.0, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
-ax2.arrow( 25, 2.0, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
-ax2.arrow( 32, 2.0, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
-ax2.arrow( 38, 2.0, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
-ax2.arrow( 45, 2.0, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 0, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 7, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 13, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 20, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 25, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 32, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 38, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 45, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 50, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 56, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 63, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 70, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 75, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 81, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 88, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 94, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 88, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 94, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+ax2.arrow( 100, 2.2, 1.0, 0, fc="blue", ec="blue", head_width=0.2, head_length=0.3 )
+ax2.arrow( 106, 2.2, -1.0, 0, fc="green", ec="green", head_width=0.2, head_length=0.3 )
+
 plt.savefig('/tmp/ex2-all3.png',bbox_inches='tight')
 #plt.show()
 
